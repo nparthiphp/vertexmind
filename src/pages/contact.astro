@@ -1,0 +1,203 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Contact" description="Tell VertexMind.ai what you're trying to build — agentic AI, RAG platforms, or applied ML for operations.">
+  <section class="page-hero">
+    <div class="wrap">
+      <span class="eyebrow">Contact</span>
+      <h1>Tell us what you're trying to build.</h1>
+      <p>
+        A few lines about the problem and your data is enough to start —
+        we'll follow up with questions instead of a form-generated PDF.
+      </p>
+    </div>
+  </section>
+
+  <section class="section contact-section">
+    <div class="wrap contact-grid">
+      <form id="contact-form" class="card contact-form">
+        <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY" />
+        <input type="hidden" name="subject" value="New inquiry from vertexmind.ai" />
+        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" />
+
+        <label>
+          <span>Name</span>
+          <input type="text" name="name" required />
+        </label>
+
+        <label>
+          <span>Work email</span>
+          <input type="email" name="email" required />
+        </label>
+
+        <label>
+          <span>Company</span>
+          <input type="text" name="company" />
+        </label>
+
+        <label>
+          <span>What are you trying to build?</span>
+          <textarea name="message" rows="5" required></textarea>
+        </label>
+
+        <button type="submit" class="btn btn-primary btn-arrow">Send</button>
+        <p id="form-status" class="form-status" role="status"></p>
+      </form>
+
+      <div class="contact-aside">
+        <div class="aside-block">
+          <span class="eyebrow">Prefer email</span>
+          <a href="mailto:hello@vertexmind.ai" class="aside-link">hello@vertexmind.ai</a>
+        </div>
+        <div class="aside-block">
+          <span class="eyebrow">Response time</span>
+          <p>Usually within one business day.</p>
+        </div>
+        <div class="aside-block">
+          <span class="eyebrow">Based in</span>
+          <p>Bengaluru, India — working with teams globally.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-hero {
+    padding: 80px 0 56px;
+    border-bottom: 1px solid var(--line);
+    background: linear-gradient(180deg, #f9fafc 0%, var(--bg) 100%);
+  }
+
+  .page-hero h1 {
+    font-size: clamp(36px, 5.2vw, 56px);
+    margin-top: 16px;
+    max-width: 620px;
+  }
+
+  .page-hero p {
+    margin-top: 18px;
+    color: var(--ink-soft);
+    font-size: 17px;
+    max-width: 540px;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+
+  .contact-form {
+    display: grid;
+    gap: 20px;
+  }
+
+  .contact-form label {
+    display: grid;
+    gap: 8px;
+    font-size: 13.5px;
+    font-family: var(--font-mono);
+    color: var(--ink-soft);
+  }
+
+  .contact-form input[type="text"],
+  .contact-form input[type="email"],
+  .contact-form textarea {
+    font-family: var(--font-body);
+    font-size: 15px;
+    padding: 12px 14px;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--ink);
+    resize: vertical;
+  }
+
+  .contact-form input:focus,
+  .contact-form textarea:focus {
+    border-color: var(--accent);
+  }
+
+  .contact-form button {
+    justify-self: start;
+    margin-top: 4px;
+  }
+
+  .hp {
+    position: absolute;
+    left: -9999px;
+  }
+
+  .form-status {
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    min-height: 18px;
+  }
+
+  .contact-aside {
+    display: grid;
+    gap: 32px;
+  }
+
+  .aside-block p,
+  .aside-link {
+    margin-top: 10px;
+    display: block;
+    font-size: 15px;
+    color: var(--ink);
+  }
+
+  .aside-link:hover {
+    color: var(--accent);
+  }
+
+  .aside-block p {
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 820px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  const form = document.getElementById("contact-form") as HTMLFormElement | null;
+  const status = document.getElementById("form-status");
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!status) return;
+
+    const key = (form.elements.namedItem("access_key") as HTMLInputElement)?.value;
+    if (!key || key === "YOUR_WEB3FORMS_ACCESS_KEY") {
+      status.textContent =
+        "Form isn't wired up yet — add a Web3Forms access key (see README) or email hello@vertexmind.ai directly.";
+      return;
+    }
+
+    status.textContent = "Sending…";
+    const data = new FormData(form);
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: data,
+      });
+      const result = await res.json();
+      if (result.success) {
+        status.textContent = "Thanks — we'll be in touch shortly.";
+        form.reset();
+      } else {
+        status.textContent = "Something went wrong. Please email hello@vertexmind.ai instead.";
+      }
+    } catch {
+      status.textContent = "Something went wrong. Please email hello@vertexmind.ai instead.";
+    }
+  });
+</script>

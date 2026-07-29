@@ -1,0 +1,237 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const repos = [
+  {
+    name: "docchunker-api",
+    tag: "RAG · INGESTION",
+    desc: "Document chunking service — splits heterogeneous source documents into retrieval-ready segments while preserving structural context.",
+    url: "https://github.com/nparthiphp/docchunker-api",
+  },
+  {
+    name: "retrieval-service",
+    tag: "RAG · RETRIEVAL",
+    desc: "Vector retrieval microservice — the query-side layer that turns a chunked knowledge base into ranked, relevant results.",
+    url: "https://github.com/nparthiphp/retrieval-service",
+  },
+  {
+    name: "reranker-service",
+    tag: "RAG · RANKING",
+    desc: "Cross-encoder reranking service that sits after retrieval to push the truly relevant results to the top — the difference between a demo and something people trust.",
+    url: "https://github.com/nparthiphp/reranker-service",
+  },
+  {
+    name: "schema-mapping-studio",
+    tag: "AGENTIC AI · DATA",
+    desc: "A FastAPI production microservice that uses an LLM to propose JSONata schema mappings between systems — CRM/contact-center signal normalization across Zendesk, Genesys, and Salesforce — gated behind a human-approval step.",
+    url: "https://github.com/nparthiphp/schema-mapping-studio",
+  },
+];
+
+const patterns = [
+  {
+    tag: "PATTERN",
+    title: "Policy & governance layer for autonomous agents",
+    desc: "A shared policy-enforcement service that sits in front of any autonomous agent — evaluating proposed actions against configurable rules before they execute, so agents get more autonomy without losing an approval trail.",
+  },
+  {
+    tag: "PATTERN",
+    title: "Decision dashboards for cloud & network operations",
+    desc: "ML-driven views that convert raw telemetry and cost data into a short list of decisions worth making — built to reduce dashboard fatigue, not add to it.",
+  },
+];
+---
+
+<Layout title="Work" description="Open-source RAG and agentic AI microservices, plus the architecture patterns VertexMind.ai applies for clients.">
+  <section class="page-hero">
+    <div class="wrap">
+      <span class="eyebrow">Work</span>
+      <h1>Proof, not promises</h1>
+      <p>
+        VertexMind.ai is a new practice — so instead of a wall of client logos,
+        here's the actual code. These are production-style microservices built
+        and open-sourced, plus the architecture patterns we bring to client work.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Open-source proof of work</span>
+        <h2>RAG & agentic microservices, on GitHub</h2>
+        <p>Real, inspectable repositories — not screenshots.</p>
+      </div>
+
+      <div class="repo-grid">
+        {repos.map((r) => (
+          <a class="card repo-card reveal" href={r.url} target="_blank" rel="noopener noreferrer">
+            <div class="repo-top">
+              <span class="tag">{r.tag}</span>
+              <span class="repo-arrow">↗</span>
+            </div>
+            <h3>{r.name}</h3>
+            <p>{r.desc}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section patterns-section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Architecture patterns</span>
+        <h2>What we apply in client engagements</h2>
+        <p>
+          Categories of system design pulled from enterprise AIOps and network-operations
+          work — described here at the pattern level. Named case studies are available on request.
+        </p>
+      </div>
+
+      <div class="pattern-list">
+        {patterns.map((p) => (
+          <div class="pattern-row reveal">
+            <span class="tag">{p.tag}</span>
+            <div>
+              <h3>{p.title}</h3>
+              <p>{p.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section cta-band">
+    <div class="wrap cta-inner">
+      <div>
+        <span class="eyebrow" style="color:#b6bccb">Want the detail behind a pattern?</span>
+        <h2>Ask for the architecture walkthrough.</h2>
+      </div>
+      <a href="/contact" class="btn btn-primary btn-arrow">Start a conversation</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-hero {
+    padding: 80px 0 56px;
+    border-bottom: 1px solid var(--line);
+    background: linear-gradient(180deg, #f9fafc 0%, var(--bg) 100%);
+  }
+
+  .page-hero h1 {
+    font-size: clamp(36px, 5.2vw, 56px);
+    margin-top: 16px;
+    max-width: 640px;
+  }
+
+  .page-hero p {
+    margin-top: 18px;
+    color: var(--ink-soft);
+    font-size: 17px;
+    max-width: 580px;
+  }
+
+  .repo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+  }
+
+  .repo-card {
+    display: block;
+  }
+
+  .repo-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .repo-arrow {
+    color: var(--ink-faint);
+    transition: transform 0.15s ease, color 0.15s ease;
+  }
+
+  .repo-card:hover .repo-arrow {
+    transform: translate(2px, -2px);
+    color: var(--accent);
+  }
+
+  .repo-card h3 {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    margin-top: 16px;
+    color: var(--ink);
+  }
+
+  .repo-card p {
+    margin-top: 10px;
+    color: var(--ink-soft);
+    font-size: 14.5px;
+    line-height: 1.7;
+  }
+
+  .patterns-section {
+    background: var(--surface-sunken);
+  }
+
+  .pattern-list {
+    display: grid;
+    gap: 1px;
+    background: var(--line-strong);
+    border: 1px solid var(--line-strong);
+  }
+
+  .pattern-row {
+    background: var(--surface);
+    padding: 28px;
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .pattern-row h3 {
+    font-size: 18px;
+  }
+
+  .pattern-row p {
+    margin-top: 10px;
+    color: var(--ink-soft);
+    font-size: 14.5px;
+    line-height: 1.7;
+  }
+
+  .cta-band {
+    background: var(--ink);
+    border-bottom: none;
+  }
+
+  .cta-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .cta-inner h2 {
+    color: #fff;
+    font-size: clamp(24px, 3vw, 32px);
+    margin-top: 10px;
+    max-width: 440px;
+  }
+
+  @media (max-width: 720px) {
+    .repo-grid {
+      grid-template-columns: 1fr;
+    }
+    .pattern-row {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+  }
+</style>

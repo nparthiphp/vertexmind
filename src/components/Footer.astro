@@ -1,0 +1,95 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="wrap foot-grid">
+    <div class="foot-brand">
+      <span class="logo-word">VertexMind<span class="logo-suffix">.ai</span></span>
+      <p>Production-grade AI systems — agentic AI, RAG platforms, and applied ML architecture for enterprise teams.</p>
+    </div>
+
+    <div class="foot-col">
+      <span class="eyebrow" style="margin-bottom:14px">Site</span>
+      <a href="/capabilities">Capabilities</a>
+      <a href="/work">Work</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+    </div>
+
+    <div class="foot-col">
+      <span class="eyebrow" style="margin-bottom:14px">Connect</span>
+      <a href="mailto:hello@vertexmind.ai">hello@vertexmind.ai</a>
+      <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
+  </div>
+
+  <div class="wrap foot-base">
+    <span>© {year} VertexMind.ai</span>
+    <span class="foot-tag">Built on Astro · Deployed on Azure Static Web Apps</span>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--ink);
+    color: #cdd2dc;
+    padding: 72px 0 0;
+  }
+
+  .foot-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 56px;
+  }
+
+  .foot-brand .logo-word {
+    color: #fff;
+  }
+
+  .foot-brand p {
+    margin-top: 16px;
+    color: #9aa1b0;
+    font-size: 14.5px;
+    max-width: 320px;
+    line-height: 1.7;
+  }
+
+  .foot-col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .foot-col a {
+    color: #b6bccb;
+    font-size: 14.5px;
+  }
+
+  .foot-col a:hover {
+    color: #fff;
+  }
+
+  .foot-base {
+    display: flex;
+    justify-content: space-between;
+    padding: 22px 28px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: #767d8c;
+  }
+
+  @media (max-width: 720px) {
+    .foot-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .foot-base {
+      flex-direction: column;
+      gap: 8px;
+    }
+  }
+</style>

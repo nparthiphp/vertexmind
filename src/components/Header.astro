@@ -1,0 +1,174 @@
+---
+const nav = [
+  { href: "/capabilities", label: "Capabilities" },
+  { href: "/work", label: "Work" },
+  { href: "/about", label: "About" },
+];
+const path = Astro.url.pathname;
+---
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a href="/" class="logo" aria-label="VertexMind.ai home">
+      <span class="logo-mark" aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M12 3 L21 20 L3 20 Z" stroke="#0E1116" stroke-width="2" stroke-linejoin="round"/>
+          <circle cx="12" cy="3" r="2.6" fill="#14B8A6"/>
+        </svg>
+      </span>
+      <span class="logo-word">VertexMind<span class="logo-suffix">.ai</span></span>
+    </a>
+
+    <nav class="main-nav" aria-label="Primary">
+      {nav.map((item) => (
+        <a href={item.href} class={path === item.href ? "active" : ""}>{item.label}</a>
+      ))}
+    </nav>
+
+    <a href="/contact" class="btn btn-primary header-cta">Start a conversation</a>
+
+    <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle menu">
+      <span></span><span></span>
+    </button>
+  </div>
+
+  <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile">
+    {nav.map((item) => (
+      <a href={item.href}>{item.label}</a>
+    ))}
+    <a href="/contact" class="btn btn-primary">Start a conversation</a>
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(246, 247, 250, 0.86);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .bar {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    height: 76px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-right: auto;
+  }
+
+  .logo-word {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+
+  .logo-suffix {
+    color: var(--accent);
+  }
+
+  .main-nav {
+    display: flex;
+    gap: 30px;
+  }
+
+  .main-nav a {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.03em;
+    color: var(--ink-soft);
+    position: relative;
+    padding: 4px 0;
+  }
+
+  .main-nav a:hover,
+  .main-nav a.active {
+    color: var(--ink);
+  }
+
+  .main-nav a.active::after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--pulse);
+  }
+
+  .header-cta {
+    padding: 10px 18px;
+  }
+
+  .menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    width: 34px;
+    height: 34px;
+    cursor: pointer;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+
+  .menu-toggle span {
+    width: 20px;
+    height: 1.5px;
+    background: var(--ink);
+    display: block;
+  }
+
+  .mobile-nav {
+    display: none;
+    flex-direction: column;
+    gap: 2px;
+    padding: 8px 28px 24px;
+    border-top: 1px solid var(--line);
+  }
+
+  .mobile-nav a {
+    padding: 12px 0;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--ink-soft);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .mobile-nav .btn {
+    margin-top: 14px;
+    justify-content: center;
+  }
+
+  @media (max-width: 860px) {
+    .main-nav,
+    .header-cta {
+      display: none;
+    }
+    .menu-toggle {
+      display: flex;
+    }
+    .mobile-nav.open {
+      display: flex;
+    }
+  }
+</style>
+
+<script>
+  const toggle = document.getElementById("menu-toggle");
+  const nav = document.getElementById("mobile-nav");
+  toggle?.addEventListener("click", () => {
+    const open = nav?.classList.toggle("open");
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+</script>

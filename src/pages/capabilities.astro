@@ -1,0 +1,200 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const services = [
+  {
+    tag: "01 — AGENTIC AI",
+    title: "Autonomous agent systems",
+    problem: "Manual workflows that need judgment, not just automation — triage, investigation, remediation.",
+    approach: "Multi-agent orchestration with clear role boundaries, a policy/governance layer that gates risky actions, and full trace logging so every decision is auditable.",
+    deliver: ["Agent architecture & orchestration design", "Policy & guardrail layer", "Tool/action integration", "Observability & audit trail"],
+    icon: `<svg viewBox="0 0 24 24" fill="none"><circle cx="7" cy="7" r="2.4" stroke="#3B35D6" stroke-width="1.6"/><circle cx="17" cy="7" r="2.4" stroke="#3B35D6" stroke-width="1.6"/><circle cx="12" cy="18" r="2.4" stroke="#3B35D6" stroke-width="1.6"/><path d="M9 8.5L11 15.5M15 8.5L13 15.5M9.5 7H14.5" stroke="#3B35D6" stroke-width="1.4"/></svg>`,
+  },
+  {
+    tag: "02 — RAG & KNOWLEDGE",
+    title: "Retrieval & knowledge platforms",
+    problem: "Institutional knowledge scattered across documents, wikis, and systems that no search bar can reach.",
+    approach: "Purpose-built chunking and reranking pipelines, schema-mapping across inconsistent data sources, and evaluation harnesses so retrieval quality is measured, not assumed.",
+    deliver: ["Document ingestion & chunking pipeline", "Retrieval + reranking service", "Schema mapping across sources", "Accuracy evaluation framework"],
+    icon: `<svg viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="4" rx="1" stroke="#0F6E56" stroke-width="1.6"/><rect x="4" y="10.5" width="16" height="4" rx="1" stroke="#0F6E56" stroke-width="1.6"/><rect x="4" y="16" width="10" height="4" rx="1" stroke="#0F6E56" stroke-width="1.6"/></svg>`,
+  },
+  {
+    tag: "03 — AI-DRIVEN OPS",
+    title: "Applied ML for operations",
+    problem: "Teams drowning in telemetry and dashboards, with no system that turns signal into action.",
+    approach: "Decision-science models layered on top of operational data — for network operations, cloud FinOps, or infrastructure — that surface the few decisions that matter.",
+    deliver: ["Operational data architecture", "ML models for anomaly & cost signals", "Decision dashboards", "Human-in-the-loop workflows"],
+    icon: `<svg viewBox="0 0 24 24" fill="none"><path d="M4 18a8 8 0 0 1 16 0" stroke="#3B35D6" stroke-width="1.6"/><path d="M12 18L16 10" stroke="#3B35D6" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="18" r="1.4" fill="#3B35D6"/></svg>`,
+  },
+  {
+    tag: "04 — ADVISORY",
+    title: "Architecture review & AI readiness",
+    problem: "A team about to commit budget to an AI initiative without knowing if the foundations will hold.",
+    approach: "A focused technical review of your data, infra, and proposed architecture — what will work, what will break at scale, and what to build first.",
+    deliver: ["System & data architecture review", "Build-vs-buy guidance", "Risk & scaling assessment", "Prioritized roadmap"],
+    icon: `<svg viewBox="0 0 24 24" fill="none"><path d="M12 3 L21 20 L3 20 Z" stroke="#0F6E56" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="14" r="1.4" fill="#0F6E56"/></svg>`,
+  },
+];
+---
+
+<Layout title="Capabilities" description="Agentic AI, RAG platforms, AI-driven operations, and architecture advisory — how VertexMind.ai builds AI systems that hold up in production.">
+  <section class="page-hero">
+    <div class="wrap">
+      <span class="eyebrow">Capabilities</span>
+      <h1>Four ways we help — one architecture discipline</h1>
+      <p>
+        Each engagement is scoped around a real workflow and real data, not a
+        generic AI package. Below is how we approach each category of work.
+      </p>
+    </div>
+  </section>
+
+  <section class="section services">
+    <div class="wrap">
+      {services.map((s, i) => (
+        <div class={`service-row reveal ${i % 2 === 1 ? "reverse" : ""}`}>
+          <div class="service-copy">
+            <div class={`icon-tile ${i % 2 === 1 ? "pulse" : ""}`} set:html={s.icon} />
+            <span class="tag">{s.tag}</span>
+            <h2>{s.title}</h2>
+            <p class="problem"><strong>The problem:</strong> {s.problem}</p>
+            <p class="approach"><strong>Our approach:</strong> {s.approach}</p>
+          </div>
+          <div class="service-deliver card">
+            <span class="eyebrow" style="margin-bottom:16px">What you get</span>
+            <ul>
+              {s.deliver.map((d) => <li>{d}</li>)}
+            </ul>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section cta-band">
+    <div class="wrap cta-inner">
+      <div>
+        <span class="eyebrow" style="color:#b6bccb">Not sure which one fits?</span>
+        <h2>Send over what you're working on — we'll scope it together.</h2>
+      </div>
+      <a href="/contact" class="btn btn-primary btn-arrow">Start a conversation</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-hero {
+    padding: 80px 0 56px;
+    border-bottom: 1px solid var(--line);
+    background: linear-gradient(180deg, #f9fafc 0%, var(--bg) 100%);
+  }
+
+  .page-hero h1 {
+    font-size: clamp(36px, 5.2vw, 56px);
+    margin-top: 16px;
+    max-width: 720px;
+  }
+
+  .page-hero p {
+    margin-top: 18px;
+    color: var(--ink-soft);
+    font-size: 17px;
+    max-width: 560px;
+  }
+
+  .service-row {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 48px;
+    padding: 56px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: start;
+  }
+
+  .service-row:first-child {
+    padding-top: 0;
+  }
+
+  .service-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .service-row.reverse {
+    direction: rtl;
+  }
+
+  .service-row.reverse > * {
+    direction: ltr;
+  }
+
+  .service-copy h2 {
+    font-size: 28px;
+    margin-top: 14px;
+  }
+
+  .service-copy p {
+    margin-top: 16px;
+    color: var(--ink-soft);
+    font-size: 15.5px;
+    line-height: 1.75;
+  }
+
+  .service-copy strong {
+    color: var(--ink);
+  }
+
+  .service-deliver ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+  }
+
+  .service-deliver li {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    padding-left: 18px;
+    position: relative;
+  }
+
+  .service-deliver li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 6px;
+    height: 6px;
+    background: var(--pulse);
+    border-radius: 50%;
+  }
+
+  .cta-band {
+    background: var(--ink);
+    border-bottom: none;
+  }
+
+  .cta-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .cta-inner h2 {
+    color: #fff;
+    font-size: clamp(24px, 3vw, 32px);
+    margin-top: 10px;
+    max-width: 460px;
+  }
+
+  @media (max-width: 820px) {
+    .service-row,
+    .service-row.reverse {
+      grid-template-columns: 1fr;
+      direction: ltr;
+    }
+  }
+</style>

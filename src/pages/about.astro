@@ -1,0 +1,138 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const stack = [
+  "RAG architecture", "Agentic AI", "LLM orchestration", "Schema mapping",
+  "Decision science", "Cloud & network AIOps", "FastAPI / Python", "Full-stack systems design",
+];
+---
+
+<Layout title="About" description="VertexMind.ai is founded and built by a solution architect with 20+ years of enterprise AI/ML and full-stack engineering experience.">
+  <section class="page-hero">
+    <div class="wrap about-grid">
+      <div>
+        <span class="eyebrow">About</span>
+        <h1>Built by someone who's shipped this before.</h1>
+        <p class="lead">
+          VertexMind.ai is founded on a simple belief: AI systems earn trust
+          by working reliably in production, not by demoing well once.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap narrow">
+      <p>
+        VertexMind.ai is founded and led as both CEO and CTO by a solution
+        architect with over 20 years of enterprise experience spanning AI/ML
+        architecture, decision science, and full-stack engineering — across
+        nine companies, from early-stage engineering roles to senior
+        architecture positions on large-scale operations platforms.
+      </p>
+      <p>
+        That background shapes how VertexMind approaches every engagement:
+        start from the data and the workflow, design the retrieval and
+        orchestration layers deliberately, and treat evaluation and
+        observability as part of the system — not an afterthought bolted on
+        before a demo.
+      </p>
+      <p>
+        VertexMind.ai exists to bring that same architecture discipline to
+        teams who need AI systems that hold up past the pilot stage —
+        agentic workflows, retrieval platforms, and applied ML for operations,
+        built and owned end to end.
+      </p>
+    </div>
+  </section>
+
+  <section class="section stack-section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Focus areas</span>
+        <h2>What sits behind the work</h2>
+      </div>
+      <div class="stack-tags">
+        {stack.map((s) => <span class="tag stack-tag">{s}</span>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section cta-band">
+    <div class="wrap cta-inner">
+      <div>
+        <span class="eyebrow" style="color:#b6bccb">Curious how this applies to your problem?</span>
+        <h2>Let's talk through what you're building.</h2>
+      </div>
+      <a href="/contact" class="btn btn-primary btn-arrow">Start a conversation</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-hero {
+    padding: 80px 0 56px;
+    border-bottom: 1px solid var(--line);
+    background: linear-gradient(180deg, #f9fafc 0%, var(--bg) 100%);
+  }
+
+  .page-hero h1 {
+    font-size: clamp(36px, 5.4vw, 58px);
+    margin-top: 16px;
+    max-width: 680px;
+  }
+
+  .lead {
+    margin-top: 20px;
+    font-size: 18px;
+    color: var(--ink-soft);
+    max-width: 560px;
+  }
+
+  .narrow {
+    max-width: 720px;
+    display: grid;
+    gap: 22px;
+  }
+
+  .narrow p {
+    font-size: 16.5px;
+    line-height: 1.85;
+    color: var(--ink-soft);
+  }
+
+  .stack-section {
+    background: var(--surface-sunken);
+  }
+
+  .stack-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .stack-tag {
+    font-size: 13px;
+    padding: 9px 14px;
+  }
+
+  .cta-band {
+    background: var(--ink);
+    border-bottom: none;
+  }
+
+  .cta-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .cta-inner h2 {
+    color: #fff;
+    font-size: clamp(24px, 3vw, 32px);
+    margin-top: 10px;
+    max-width: 440px;
+  }
+</style>

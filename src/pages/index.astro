@@ -1,0 +1,262 @@
+---
+import Layout from "../layouts/Layout.astro";
+import NetworkGraph from "../components/NetworkGraph.astro";
+
+const pillars = [
+  {
+    tag: "AGENTIC AI",
+    title: "Autonomous agent systems",
+    body: "Multi-agent architectures that plan, act, and hand off work — with the guardrails, policy layers, and observability that production deployments actually need.",
+    pulse: false,
+    icon: `<svg viewBox="0 0 24 24" fill="none"><circle cx="7" cy="7" r="2.4" stroke="#3B35D6" stroke-width="1.6"/><circle cx="17" cy="7" r="2.4" stroke="#3B35D6" stroke-width="1.6"/><circle cx="12" cy="18" r="2.4" stroke="#3B35D6" stroke-width="1.6"/><path d="M9 8.5L11 15.5M15 8.5L13 15.5M9.5 7H14.5" stroke="#3B35D6" stroke-width="1.4"/></svg>`,
+  },
+  {
+    tag: "RAG & KNOWLEDGE",
+    title: "Retrieval & knowledge platforms",
+    body: "Document chunking, reranking, and schema-mapping pipelines built for accuracy at scale — not a demo that falls apart on real data.",
+    pulse: true,
+    icon: `<svg viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="4" rx="1" stroke="#0F6E56" stroke-width="1.6"/><rect x="4" y="10.5" width="16" height="4" rx="1" stroke="#0F6E56" stroke-width="1.6"/><rect x="4" y="16" width="10" height="4" rx="1" stroke="#0F6E56" stroke-width="1.6"/></svg>`,
+  },
+  {
+    tag: "AI-DRIVEN OPS",
+    title: "Applied ML for operations",
+    body: "Decision-science and ML systems for network operations, FinOps, and infrastructure — turning telemetry into action instead of dashboards nobody reads.",
+    pulse: false,
+    icon: `<svg viewBox="0 0 24 24" fill="none"><path d="M4 18a8 8 0 0 1 16 0" stroke="#3B35D6" stroke-width="1.6"/><path d="M12 18L16 10" stroke="#3B35D6" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="18" r="1.4" fill="#3B35D6"/></svg>`,
+  },
+];
+
+const proof = [
+  { stat: "20+", label: "years across enterprise AI/ML architecture & decision science" },
+  { stat: "9", label: "companies — from founding engineer to solution architect" },
+  { stat: "1", label: "founder, still writing the production code" },
+];
+---
+
+<Layout title="AI systems that ship, not just demo">
+  <section class="hero">
+    <div class="hero-texture" aria-hidden="true"></div>
+    <NetworkGraph height="100%" />
+    <div class="wrap hero-inner">
+      <span class="eyebrow">VertexMind.ai — Applied AI Systems</span>
+      <h1>
+        We build AI systems<br />
+        that hold up in <span class="hl">production.</span>
+      </h1>
+      <p class="hero-sub">
+        Agentic AI, RAG platforms, and applied ML — architected by an engineer
+        who has spent 20+ years shipping enterprise systems, not slideware.
+      </p>
+      <div class="hero-cta">
+        <a href="/contact" class="btn btn-primary btn-arrow">Start a conversation</a>
+        <a href="/work" class="btn btn-ghost">See how it's built</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">What we build</span>
+        <h2>Three problems, one architecture discipline</h2>
+        <p>
+          Every engagement starts the same way: understand the data, the
+          workflow, and the failure modes — then design for the version that
+          survives contact with production traffic.
+        </p>
+      </div>
+
+      <div class="pillar-grid">
+        {pillars.map((p) => (
+          <div class="card pillar reveal">
+            <div class={`icon-tile ${p.pulse ? "pulse" : ""}`} set:html={p.icon} />
+            <span class="tag">{p.tag}</span>
+            <h3>{p.title}</h3>
+            <p>{p.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section proof-section">
+    <div class="wrap proof-grid">
+      <div class="section-head" style="margin-bottom:0">
+        <span class="eyebrow">Why VertexMind</span>
+        <h2>Architecture-first, not prompt-first</h2>
+        <p>
+          A lot of "AI companies" are a thin wrapper over an API call. VertexMind
+          is run by a solution architect who designs the retrieval layer, the
+          agent orchestration, the evaluation harness, and the ops around all
+          of it — because that's the part that determines whether it survives
+          six months in production.
+        </p>
+        <a href="/about" class="btn btn-ghost btn-arrow" style="margin-top:24px">More on the background</a>
+      </div>
+
+      <div class="proof-stats">
+        {proof.map((item) => (
+          <div class="proof-item">
+            <span class="proof-num">{item.stat}</span>
+            <span class="proof-label">{item.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section cta-band">
+    <div class="wrap cta-inner">
+      <div>
+        <span class="eyebrow" style="color:#b6bccb">Have a system that needs an architect?</span>
+        <h2>Tell us what you're trying to automate.</h2>
+      </div>
+      <a href="/contact" class="btn btn-primary btn-arrow">Start a conversation</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 640px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    border-bottom: 1px solid var(--line);
+    background: linear-gradient(180deg, #f9fafc 0%, var(--bg) 100%);
+  }
+
+  .hero-texture {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: radial-gradient(var(--line-strong) 1px, transparent 1px);
+    background-size: 26px 26px;
+    mask-image: radial-gradient(circle at 20% 30%, black 0%, transparent 65%);
+    opacity: 0.7;
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    padding-top: 96px;
+    padding-bottom: 96px;
+    max-width: 720px;
+  }
+
+  .hero h1 {
+    font-size: clamp(42px, 6.4vw, 78px);
+    margin-top: 18px;
+  }
+
+  .hl {
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    margin-top: 24px;
+    font-size: 18px;
+    color: var(--ink-soft);
+    max-width: 560px;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 14px;
+    margin-top: 36px;
+    flex-wrap: wrap;
+  }
+
+  .pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .pillar h3 {
+    font-size: 20px;
+    margin-top: 16px;
+  }
+
+  .pillar p {
+    margin-top: 12px;
+    color: var(--ink-soft);
+    font-size: 15px;
+  }
+
+  .proof-section {
+    background: var(--surface-sunken);
+  }
+
+  .proof-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+
+  .proof-stats {
+    display: grid;
+    gap: 28px;
+    border-left: 1px solid var(--line-strong);
+    padding-left: 40px;
+  }
+
+  .proof-num {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 44px;
+    color: var(--ink);
+  }
+
+  .proof-label {
+    display: block;
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin-top: 4px;
+    max-width: 280px;
+  }
+
+  .cta-band {
+    background: var(--ink);
+    border-bottom: none;
+  }
+
+  .cta-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .cta-inner h2 {
+    color: #fff;
+    font-size: clamp(24px, 3vw, 34px);
+    margin-top: 10px;
+    max-width: 480px;
+  }
+
+  @media (max-width: 900px) {
+    .pillar-grid {
+      grid-template-columns: 1fr;
+    }
+    .proof-grid {
+      grid-template-columns: 1fr;
+    }
+    .proof-stats {
+      border-left: none;
+      padding-left: 0;
+      border-top: 1px solid var(--line-strong);
+      padding-top: 28px;
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .proof-stats {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
