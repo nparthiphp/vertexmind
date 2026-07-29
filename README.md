@@ -2,6 +2,7 @@
 
 Marketing site for VertexMind.ai — built with [Astro](https://astro.build) (static output), designed for [Azure Static Web Apps](https://azure.microsoft.com/en-us/products/app-service/static).
 
+
 ## Structure
 
 ```
