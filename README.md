@@ -69,6 +69,7 @@ static hosting.
 Update `hello@vertexmind.ai` throughout the site (Footer, Contact page) to
 your real inbox before launch.
 
+
 ## Design system
 Tokens live in `src/styles/global.css`:
 - Background `#F6F7FA`, ink `#0E1116`, signal accent `#3B35D6` (electric
