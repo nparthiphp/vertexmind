@@ -1,6 +1,10 @@
 name: VertexMind - Build and Deploy Debug
 
 on:
+  push:
+    branches:
+      - main
+
   workflow_dispatch:
 
 jobs:
@@ -9,179 +13,33 @@ jobs:
 
     steps:
 
-      # ============================================================
-      # 1. CHECKOUT
-      # ============================================================
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
+          ref: main
           submodules: true
           lfs: false
 
-
-      # ============================================================
-      # 2. PRINT APPLICATION / AZURE CONFIGURATION
-      # ============================================================
-      - name: Print Web App Configuration
+      - name: Print Azure Static Web App Configuration
         run: |
           echo "=================================================="
-          echo "        VERTEXMIND DEPLOYMENT CONFIGURATION"
+          echo "AZURE STATIC WEB APP CONFIGURATION"
           echo "=================================================="
 
-          echo ""
-          echo "Azure Static Web App"
-          echo "--------------------"
           echo "Web App Name       : VertexMind"
           echo "Resource Group     : rg-vertex-mind"
           echo "Location           : East Asia"
           echo "Hostname           : yellow-pond-032cf2900.7.azurestaticapps.net"
-
-          echo ""
-          echo "GitHub"
-          echo "------"
-          echo "Repository         : nparthiphp/vertexmind"
+          echo "GitHub Repository  : nparthiphp/vertexmind"
           echo "Branch             : main"
 
           echo ""
-          echo "Build"
-          echo "-----"
-          echo "App Location       : /"
-          echo "Build Command      : npm run build"
-          echo "Artifact Location  : dist"
+          echo "Current Git Branch:"
+          git branch --show-current
 
           echo ""
-          echo "Azure Deployment"
-          echo "----------------"
-          echo "Action             : upload"
-          echo "Skip App Build     : true"
+          echo "Current Commit:"
+          git rev-parse HEAD
 
           echo ""
-          echo "GitHub Secret"
-          echo "-------------"
-          echo "Secret Name        : AZURE_STATIC_WEB_APPS_API_TOKEN_YELLOW_POND_032CF2900"
-
-          if [ -n "${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_YELLOW_POND_032CF2900 }}" ]; then
-            echo "Secret Status      : EXISTS"
-          else
-            echo "Secret Status      : MISSING"
-          fi
-
-          echo "Secret Value       : [HIDDEN]"
-
-          echo ""
-          echo "=================================================="
-
-
-      # ============================================================
-      # 3. SETUP NODE
-      # ============================================================
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-
-
-      # ============================================================
-      # 4. INSTALL DEPENDENCIES
-      # ============================================================
-      - name: Install Dependencies
-        run: |
-          echo "=================================================="
-          echo "Installing npm dependencies"
-          echo "=================================================="
-
-          npm ci
-
-
-      # ============================================================
-      # 5. BUILD
-      # ============================================================
-      - name: Build Application
-        run: |
-          echo "=================================================="
-          echo "BUILD START"
-          echo "=================================================="
-
-          npm run build
-
-          echo ""
-          echo "=================================================="
-          echo "BUILD COMPLETED"
-          echo "=================================================="
-
-
-      # ============================================================
-      # 6. VERIFY DIST
-      # ============================================================
-      - name: Verify Build Output
-        run: |
-          echo "=================================================="
-          echo "VERIFYING DIST DIRECTORY"
-          echo "=================================================="
-
-          if [ -d "dist" ]; then
-            echo "SUCCESS: dist directory exists"
-          else
-            echo "ERROR: dist directory does not exist"
-            exit 1
-          fi
-
-          echo ""
-          echo "dist contents:"
-          ls -lah dist
-
-          echo ""
-          echo "Number of files:"
-          find dist -type f | wc -l
-
-          echo ""
-          echo "First 50 files:"
-          find dist -type f | head -50
-
-          echo ""
-          echo "=================================================="
-          echo "BUILD VALIDATION SUCCESS"
-          echo "=================================================="
-
-
-      # ============================================================
-      # 7. DEPLOY TO AZURE STATIC WEB APP
-      # ============================================================
-      - name: Deploy to Azure Static Web App
-        id: deploy
-        uses: Azure/static-web-apps-deploy@v1
-        with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_YELLOW_POND_032CF2900 }}
-          action: upload
-          app_location: "/"
-          skip_app_build: true
-          output_location: "dist"
-
-
-      # ============================================================
-      # 8. DEPLOYMENT COMPLETED
-      # ============================================================
-      - name: Deployment Success
-        if: success()
-        run: |
-          echo "=================================================="
-          echo "        DEPLOYMENT SUCCESS"
-          echo "=================================================="
-          echo "Web App Name : VertexMind"
-          echo "Hostname     : yellow-pond-032cf2900.7.azurestaticapps.net"
-          echo "=================================================="
-
-
-      # ============================================================
-      # 9. DEPLOYMENT FAILED
-      # ============================================================
-      - name: Deployment Failed
-        if: failure()
-        run: |
-          echo "=================================================="
-          echo "        DEPLOYMENT FAILED"
-          echo "=================================================="
-          echo "Build may have succeeded."
-          echo "Check the Azure Static Web Apps deployment step."
           echo "=================================================="
