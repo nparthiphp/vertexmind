@@ -1,0 +1,42 @@
+name: VertexMind - Build Only
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Astro
+        run: npm run build
+
+      - name: Check dist
+        run: |
+          echo "===== DIST CONTENT ====="
+          ls -la
+          echo "===== DIST DIRECTORY ====="
+          ls -la dist
+          echo "===== DIST FILE COUNT ====="
+          find dist -type f | wc -l
+
+      - name: Upload dist artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: vertexmind-dist
+          path: dist/
